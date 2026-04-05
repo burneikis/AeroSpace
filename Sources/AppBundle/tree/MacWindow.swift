@@ -225,11 +225,33 @@ private func unbindAndGetBindingDataForNewTilingWindow(_ workspace: Workspace, w
     window?.unbindFromParent() // It's important to unbind to get correct data from below
     let mruWindow = workspace.mostRecentWindowRecursive
     if let mruWindow, let tilingParent = mruWindow.parent as? TilingContainer {
-        return BindingData(
-            parent: tilingParent,
-            adaptiveWeight: WEIGHT_AUTO,
-            index: mruWindow.ownIndex.orDie() + 1,
-        )
+        if config.enableDwindleAutotiling {
+            // Dwindle autotiling: wrap the MRU window in a new container whose
+            // orientation is determined by the long side of the MRU window's rect.
+            // The new window is placed as a sibling of the MRU window inside that container.
+            let rect = mruWindow.lastAppliedLayoutVirtualRect
+            let orientation: Orientation = (rect.map { $0.width >= $0.height } ?? true) ? .h : .v
+            let mruData = mruWindow.unbindFromParent()
+            let newContainer = TilingContainer(
+                parent: tilingParent,
+                adaptiveWeight: mruData.adaptiveWeight,
+                orientation,
+                .tiles,
+                index: mruData.index,
+            )
+            mruWindow.bind(to: newContainer, adaptiveWeight: WEIGHT_AUTO, index: 0)
+            return BindingData(
+                parent: newContainer,
+                adaptiveWeight: WEIGHT_AUTO,
+                index: 1,
+            )
+        } else {
+            return BindingData(
+                parent: tilingParent,
+                adaptiveWeight: WEIGHT_AUTO,
+                index: mruWindow.ownIndex.orDie() + 1,
+            )
+        }
     } else {
         return BindingData(
             parent: workspace.rootTilingContainer,
