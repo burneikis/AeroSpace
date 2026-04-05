@@ -1,0 +1,34 @@
+= aerospace-list-tree(1)
+include::util/man-attributes.adoc[]
+// tag::purpose[]
+:manpurpose: Print the tree of windows and containers
+// end::purpose[]
+:manname: aerospace-list-tree
+
+// =========================================================== Synopsis
+== Synopsis
+[verse]
+// tag::synopsis[]
+aerospace list-tree [-h|--help] [--full] [--workspace <workspace>]
+
+// end::synopsis[]
+
+// =========================================================== Description
+== Description
+
+// tag::body[]
+{manpurpose}
+
+// =========================================================== Options
+include::util/conditional-options-header.adoc[]
+
+-h, --help:: Print help
+
+--full:: Print the full tree without collapsing single-child containers
+
+--workspace <workspace>:: Only print the tree for the specified workspace
+
+// end::body[]
+
+// =========================================================== Footer
+include::util/man-footer.adoc[]
