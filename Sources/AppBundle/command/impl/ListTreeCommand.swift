@@ -14,6 +14,7 @@ struct ListTreeCommand: Command {
         }
 
         for workspace in workspaces {
+            if workspace.isEffectivelyEmpty { continue }
             let monitor = workspace.workspaceMonitor
             io.out("Workspace '\(workspace.name)' (monitor: \(monitor.name))")
             try await printTreeNode(workspace.rootTilingContainer, indent: "  ", io: io)
