@@ -20,6 +20,10 @@ auto-reload-config = false
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
+# Dwindle autotiling: new windows take half the space of the focused window,
+# splitting along the longer side (wide windows split horizontal, tall split vertical)
+enable-dwindle-autotiling = false
+
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
