@@ -1,3 +1,15 @@
+# AeroSpace with Dwindle Autotiling
+
+This is a fork of AeroSpace with Dwindle autotiling layout.
+There are three new branches
+- feature/dwindle-autotiling - the main branch with Dwindle autotiling layout
+- feature/print-tree - branch with a new command to print the tree of windows and workspaces in a human readable format.
+- dwin-print - Combined branch with both the above features.
+
+Example:
+
+![Example](./dwindle-example.png)
+
 # AeroSpace Beta [![Build](https://github.com/nikitabobko/AeroSpace/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/nikitabobko/AeroSpace/actions/workflows/build.yml)
 
 <img src="./resources/Assets.xcassets/AppIcon.appiconset/icon.png" width="40%" align="right">
