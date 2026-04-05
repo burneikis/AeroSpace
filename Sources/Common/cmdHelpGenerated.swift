@@ -70,7 +70,7 @@ let list_modes_help_generated = """
     USAGE: list-modes [-h|--help] [--current] [--count] [--json]
     """
 let list_tree_help_generated = """
-    USAGE: list-tree [-h|--help] [--workspace <workspace>]
+    USAGE: list-tree [-h|--help] [--full] [--workspace <workspace>]
     """
 let list_monitors_help_generated = """
     USAGE: list-monitors [-h|--help] [--focused [no]] [--mouse [no]] [--format <output-format>] [--count] [--json]

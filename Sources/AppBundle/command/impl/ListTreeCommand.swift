@@ -17,7 +17,7 @@ struct ListTreeCommand: Command {
             if workspace.isEffectivelyEmpty { continue }
             let monitor = workspace.workspaceMonitor
             io.out("Workspace '\(workspace.name)' (monitor: \(monitor.name))")
-            try await printTreeNode(workspace.rootTilingContainer, indent: "  ", io: io)
+            try await printTreeNode(workspace.rootTilingContainer, indent: "  ", io: io, collapse: !args.fullTree)
 
             let floatingWindows = workspace.floatingWindows
             if !floatingWindows.isEmpty {
@@ -57,13 +57,18 @@ struct ListTreeCommand: Command {
     }
 
     @MainActor
-    private func printTreeNode(_ node: TreeNode, indent: String, io: CmdIo) async throws {
+    private func printTreeNode(_ node: TreeNode, indent: String, io: CmdIo, collapse: Bool) async throws {
         switch node.nodeCases {
         case .tilingContainer(let container):
+            // Skip single-child containers — they add noise without meaningful splits
+            if collapse && container.children.count == 1 {
+                try await printTreeNode(container.children[0], indent: indent, io: io, collapse: collapse)
+                return
+            }
             let layoutDesc = "\(container.layout)(\(container.orientation))"
             io.out("\(indent)\(layoutDesc)")
             for child in container.children {
-                try await printTreeNode(child, indent: indent + "  ", io: io)
+                try await printTreeNode(child, indent: indent + "  ", io: io, collapse: collapse)
             }
         case .window(let window):
             let title = try await window.title
