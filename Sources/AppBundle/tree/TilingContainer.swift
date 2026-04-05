@@ -32,7 +32,7 @@ extension TilingContainer {
         if orientation == targetOrientation {
             return
         }
-        if config.enableNormalizationOppositeOrientationForNestedContainers {
+        if config.enableNormalizationOppositeOrientationForNestedContainers && !config.enableDwindleAutotiling {
             var orientation = targetOrientation
             parentsWithSelf
                 .filterIsInstance(of: TilingContainer.self)

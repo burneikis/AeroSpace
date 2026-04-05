@@ -22,6 +22,9 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 
 # Dwindle autotiling: new windows take half the space of the focused window,
 # splitting along the longer side (wide windows split horizontal, tall split vertical)
+# Note: when enabled, this overrides both 'enable-normalization-flatten-containers'
+# and 'enable-normalization-opposite-orientation-for-nested-containers' to false,
+# since those normalizations are incompatible with dwindle tiling.
 enable-dwindle-autotiling = false
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
